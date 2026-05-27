@@ -1,6 +1,6 @@
 /* Define o tamanho e estilo que o mapa vai ter na tela */
 #meu-mapa {
-    height: 500px;
+    height: 600px;
     width: 100%;
     border: 2px solid #ccc;
     border-radius: 8px;
@@ -8,7 +8,17 @@
 
 body {
     font-family: sans-serif;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 0 15px;
 }
+
+/* Ajusta o layout dos popups/botões do mapa */
+.leaflet-popup-content {
+    margin: 6px 8px;
+}
+
+.leaflet-control-geocoder {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
