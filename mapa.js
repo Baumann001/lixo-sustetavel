@@ -38,10 +38,21 @@ function carregarPontos() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
         pontos = raw ? JSON.parse(raw) : [];
+
+        // Compatibilidade: pontos antigos podem ter `tipo` variado.
+        // Agora não dependemos disso, então garantimos apenas as chaves básicas.
+        pontos = pontos.map((p) => {
+            if (!p || typeof p !== 'object') return p;
+            if (typeof p.tipo !== 'string') p.tipo = 'ponto';
+            if (typeof p.tipoLabel !== 'string') p.tipoLabel = '';
+            return p;
+        });
     } catch {
         pontos = [];
     }
 }
+
+
 
 function salvarPontos() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(pontos));
@@ -52,17 +63,15 @@ const markersIndex = new Map(); // id -> marker
 
 function criarPopup(ponto) {
     const titulo = ponto.titulo ? `<div class="popup-title">${escapeHtml(ponto.titulo)}</div>` : '';
-    const tipoLabel = ponto.tipo ? escapeHtml(ponto.tipo) : '';
-    const badge = tipoLabel ? `<span class="popup-badge" style="--badge-color:${corDaCategoria(tipoLabel)}">${tipoLabel}</span>` : '';
     const desc = ponto.descricao ? `<div class="popup-desc">${escapeHtml(ponto.descricao)}</div>` : '';
 
-    // Observação: sem onclick inline
-    return `${titulo}${badge}
+    return `${titulo}
         <div class="popup-actions">
             <button type="button" class="popup-remove" data-id="${escapeHtml(ponto.id)}">Remover ponto</button>
         </div>
         ${desc ? `<div class="popup-divider"></div>` : ''}`;
 }
+
 
 function renderizarPontos() {
     layerPontos.clearLayers();
@@ -129,32 +138,18 @@ mapa.on('popupopen', () => {
 });
 
 // ================================
-// Categorias + UI
+// Marcadores
 // ================================
-const CATEGORIAS = [
-    { key: 'reciclável', label: 'Reciclável', color: '#6abb01' },
-    { key: 'vidro', label: 'Vidro', color: '#2563eb' },
-    { key: 'eletrônico', label: 'Eletrônico', color: '#7c3aed' },
-    { key: 'orgânico', label: 'Orgânico', color: '#7a4f2b' },
-    { key: 'resíduo comum', label: 'Resíduo comum', color: '#64748b' }
-];
-
 let filtroCategoria = 'todas';
 
-function normalizarCategoria(t) {
+function normalizarCategoria(t){
     return String(t || '').trim().toLowerCase();
 }
 
-function corDaCategoria(tipo) {
-    const key = normalizarCategoria(tipo);
-    const cat = CATEGORIAS.find(c => c.key === key);
-    return cat ? cat.color : '#6abb01';
-}
 
-function criarIconeDaCategoria(tipo) {
-    const color = corDaCategoria(tipo);
+function criarIconeDaCategoria() {
     const html = `
-        <div class="marker-dot" style="background:${color};"></div>
+        <div class="marker-dot" style="background:#6abb01;"></div>
     `;
 
     return L.divIcon({
@@ -166,28 +161,25 @@ function criarIconeDaCategoria(tipo) {
 }
 
 function preencherSelectCategorias() {
-    const select = document.getElementById('filtro-tipo');
-    if (!select) return;
+    // Remove opções do filtro e do modal
+    const selectFiltro = document.getElementById('filtro-tipo');
+    if (selectFiltro) {
+        selectFiltro.innerHTML = '<option value="todas">Todas</option>';
+    }
 
-    // Mantém opção 'todas' (já existe no HTML)
-    CATEGORIAS.forEach((cat) => {
-        const opt = document.createElement('option');
-        opt.value = cat.key;
-        opt.textContent = cat.label;
-        select.appendChild(opt);
-    });
+    const selectCadastro = document.getElementById('cad-tipo');
+    if (selectCadastro) {
+        selectCadastro.innerHTML = '';
+    }
 }
+
+
 
 function renderFiltroChange() {
-    const select = document.getElementById('filtro-tipo');
-    if (!select) return;
-
-    select.addEventListener('change', () => {
-        const val = select.value;
-        filtroCategoria = val === 'todas' ? 'todas' : normalizarCategoria(val);
-        renderizarPontos();
-    });
+    // Sem filtro: sempre mostra todos os pontos.
+    // Mantém a função para compatibilidade com a inicialização.
 }
+
 
 // ================================
 // Modal de cadastro
@@ -243,17 +235,20 @@ function configurarModal() {
                 ? crypto.randomUUID()
                 : `${Date.now()}_${Math.random().toString(16).slice(2)}`;
 
-            const tipoLabel = CATEGORIAS.find(c => c.key === tipoKey)?.label || String(tipoKey || '');
+            // Sem tipos de lixo: cadastramos apenas o ponto.
+            const tipoFixo = 'ponto';
 
             const ponto = {
                 id,
                 lat,
                 lng,
                 titulo,
-                tipo: tipoLabel,
+                tipo: tipoFixo,
                 descricao: descricao || '',
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                tipoLabel: ''
             };
+
 
             pontos.push(ponto);
             salvarPontos();
