@@ -1,0 +1,60 @@
+/* Tema visual para o mapa (cores claras + verde) */
+:root {
+  --verde: #6abb01;
+  --verde-escuro: #3e6b04;
+  --texto: #0f172a;
+  --fundo: #ffffff;
+}
+
+body {
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+/* Container do mapa */
+#meu-mapa {
+  background: #f7fbf7;
+}
+
+/* Controle de busca */
+.leaflet-control-geocoder {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Ajustes do input do geocoder */
+.leaflet-control-geocoder input {
+  border: 2px solid rgba(106, 187, 1, 0.35) !important;
+  border-radius: 12px !important;
+  padding: 10px 12px !important;
+  color: var(--texto) !important;
+}
+
+.leaflet-control-geocoder .suggestions {
+  border-radius: 12px !important;
+}
+
+/* Pins e popups */
+.leaflet-popup-content-wrapper {
+  border-radius: 14px !important;
+  border: 2px solid rgba(106, 187, 1, 0.35) !important;
+}
+
+.leaflet-popup-tip {
+  background: #ffffff !important;
+}
+
+/* Botão remover dentro do popup */
+.leaflet-popup-content button {
+  background: var(--verde-escuro);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 600;
+}
+
+.leaflet-popup-content button:hover {
+  filter: brightness(1.05);
+}
+

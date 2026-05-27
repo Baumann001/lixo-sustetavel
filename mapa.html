@@ -8,13 +8,65 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <link rel="stylesheet" href="mapa.css" />
+    <link rel="stylesheet" href="mapa-theme.css" />
+    <link rel="stylesheet" href="mapa-modal.css" />
+
 </head>
 <body>
 
-    <h1>Meu Mapa 100% Gratuito e Open Source</h1>
-    <p>Este mapa usa Leaflet e OpenStreetMap. Sem cartões, sem chaves de API!</p>
+    <header class="mapa-header">
+        <div>
+            <h1>Mapa de Pontos de Coleta</h1>
+            <p>Toque no mapa para cadastrar um ponto e filtre por tipo de lixo.</p>
+        </div>
+
+        <div class="mapa-filtros">
+            <label for="filtro-tipo" class="filtro-label">Filtrar por:</label>
+            <select id="filtro-tipo" class="filtro-select">
+                <option value="todas">Todas</option>
+            </select>
+        </div>
+    </header>
 
     <div id="meu-mapa"></div>
+
+    <!-- Modal de cadastro de ponto -->
+    <div id="modal-cadastro" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="cad-title">
+            <div class="modal-top">
+                <h2 id="cad-title">Cadastrar ponto</h2>
+                <button type="button" id="cad-close" class="modal-close" aria-label="Fechar">✕</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="field">
+                    <label for="cad-titulo">Nome do ponto</label>
+                    <input id="cad-titulo" type="text" placeholder="Ex.: Ponto de coleta - Parque" />
+                </div>
+
+                <div class="field">
+                    <label for="cad-tipo">Tipo de lixo</label>
+                    <select id="cad-tipo">
+                        <!-- opções preenchidas pelo mapa.js -->
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="cad-descricao">Descrição (opcional)</label>
+                    <textarea id="cad-descricao" rows="3" placeholder="Observações, referência, etc."></textarea>
+                </div>
+
+                <input id="cad-lat" type="hidden" />
+                <input id="cad-lng" type="hidden" />
+
+                <div class="modal-actions">
+                    <button type="button" id="cad-cancel" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" id="cad-save" class="btn btn-primary">Salvar ponto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
