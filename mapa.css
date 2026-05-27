@@ -1,0 +1,14 @@
+/* Define o tamanho e estilo que o mapa vai ter na tela */
+#meu-mapa {
+    height: 500px;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+body {
+    font-family: sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}

@@ -1,0 +1,42 @@
+.centralizar{
+    display: flex;
+justify-content: center;
+}
+
+nav{
+background-color:#6abb01 ;
+
+}
+
+#logo{
+display: flex;
+justify-content: center;
+}
+
+#logo img{
+width: auto;
+height: 300px;
+}
+
+#botao-ver-mapa{
+display: flex;
+justify-content: center;
+color: #6abb01;
+}
+
+button {
+  color: #6abb01;
+  background-color: #3e6b04;
+  border-radius: 30px;
+  border: none;       /* Opcional: remove a borda padrão do navegador */
+  padding: 10px 20px; /* Opcional: dá um espaço interno pro texto não ficar esmagado */
+  cursor: pointer;    /* Opcional: mostra a "mãozinha" ao passar o mouse */
+  
+  /* Faz o efeito de hover ser suave e não instantâneo */
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+  /* 1.1 significa que ele vai crescer 10% do tamanho original */
+  transform: scale(1.1);
+}
