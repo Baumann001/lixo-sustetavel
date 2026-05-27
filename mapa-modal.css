@@ -43,7 +43,7 @@
 
 .modal-close:hover{ background: rgba(106, 187, 1, 0.15); }
 
-.modal-body{ padding: 16px; }
+.modal-body{ padding: 20px; }
 
 .field{ margin-bottom: 12px; }
 .field label{ display:block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
