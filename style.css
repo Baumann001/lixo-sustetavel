@@ -40,3 +40,20 @@ button:hover {
   /* 1.1 significa que ele vai crescer 10% do tamanho original */
   transform: scale(1.1);
 }
+
+#botao-ver-lixos{
+display: flex;
+justify-content: center;
+color: #a51a08;
+}
+
+#vermelho{
+color: #db2810;
+background-color: #721306;
+}
+
+#alinhar{
+display: flex;
+gap: 20px;
+justify-content: center;
+}
