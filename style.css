@@ -34,6 +34,8 @@ button {
   
   /* Faz o efeito de hover ser suave e não instantâneo */
   transition: transform 0.2s ease-in-out;
+   width: 170px;
+  height: 50px;
 }
 
 button:hover {
@@ -56,4 +58,35 @@ background-color: #721306;
 display: flex;
 gap: 20px;
 justify-content: center;
+ box-sizing: border-box;
+}
+
+
+.grid-lixos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+.card-papel{
+background-color: #142cb6;
+border-radius: 10px;
+}
+
+.card-plastico{
+background-color: #cc1616;
+border-radius: 10px;
+}
+
+.card-vidro{
+
+background-color: #108d2b;
+border-radius: 10px;
+}
+
+.card-metal{
+
+background-color: #ccda0f;
+border-radius: 10px;
 }
