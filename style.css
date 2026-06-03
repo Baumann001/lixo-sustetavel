@@ -25,11 +25,18 @@ body{
 #logo{
     display: flex;
     justify-content: center;
+
 }
 
 #logo img{
     height: 300px;
     width: auto;
+}
+
+#logo:hover  img {
+   background-color: #2a5a17;
+   transform: scale(1.08);
+   border-radius: 250px;
 }
 
 /* Área dos botões */
