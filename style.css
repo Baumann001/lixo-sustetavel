@@ -1,9 +1,9 @@
-/* Rolagem suave */
+
 html{
     scroll-behavior: smooth;
 }
 
-/* Reset básico */
+
 *{
     margin: 0;
     padding: 0;
@@ -20,26 +20,48 @@ body{
     display: flex;
     justify-content: center;
 }
-
-/* Logo */
 #logo{
     display: flex;
     justify-content: center;
-
 }
 
 #logo img{
     height: 300px;
     width: auto;
+    border-radius: 50%;
+
+    transition: all 0.5s ease;
 }
 
-#logo:hover  img {
-   background-color: #2a5a17;
-   transform: scale(1.08);
-   border-radius: 250px;
+
+#logo:hover img{
+    transform: scale(1.12);
+
+    filter:
+        drop-shadow(0 0 10px #6abb01)
+        drop-shadow(0 0 20px #6abb01)
+        drop-shadow(0 0 40px #6abb01);
+
+    animation: brilho 1s infinite alternate;
 }
 
-/* Área dos botões */
+
+@keyframes brilho{
+    from{
+        filter:
+            drop-shadow(0 0 5px #6abb01)
+            drop-shadow(0 0 15px #6abb01);
+    }
+
+    to{
+        filter:
+            drop-shadow(0 0 15px #6abb01)
+            drop-shadow(0 0 35px #6abb01)
+            drop-shadow(0 0 60px #6abb01);
+    }
+}
+
+
 #alinhar{
     display: flex;
     justify-content: center;
@@ -147,5 +169,29 @@ button:hover{
     #alinhar{
         flex-direction: column;
         align-items: center;
+    }
+}
+
+
+
+h3{
+    background: linear-gradient(
+        90deg,
+        #4c8501,
+        #a5ff2f,
+        #4c8501
+    );
+
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradiente 3s linear infinite;
+}
+
+@keyframes gradiente{
+    to{
+        background-position: 200% center;
     }
 }
