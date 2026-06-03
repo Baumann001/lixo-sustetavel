@@ -1,92 +1,144 @@
+/* Rolagem suave */
+html{
+    scroll-behavior: smooth;
+}
+
+/* Reset básico */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Centralização */
 .centralizar{
     display: flex;
-justify-content: center;
+    justify-content: center;
 }
 
-nav{
-background-color:#6abb01 ;
-
-}
-
+/* Logo */
 #logo{
-display: flex;
-justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #logo img{
-width: auto;
-height: 300px;
+    height: 300px;
+    width: auto;
 }
 
-#botao-ver-mapa{
-display: flex;
-justify-content: center;
-color: #6abb01;
-}
-
-button {
-  color: #6abb01;
-  background-color: #3e6b04;
-  border-radius: 30px;
-  border: none;       /* Opcional: remove a borda padrão do navegador */
-  padding: 10px 20px; /* Opcional: dá um espaço interno pro texto não ficar esmagado */
-  cursor: pointer;    /* Opcional: mostra a "mãozinha" ao passar o mouse */
-  
-  /* Faz o efeito de hover ser suave e não instantâneo */
-  transition: transform 0.2s ease-in-out;
-   width: 170px;
-  height: 50px;
-}
-
-button:hover {
-  /* 1.1 significa que ele vai crescer 10% do tamanho original */
-  transform: scale(1.1);
-}
-
-#botao-ver-lixos{
-display: flex;
-justify-content: center;
-color: #a51a08;
-}
-
-#vermelho{
-color: #db2810;
-background-color: #721306;
-}
-
+/* Área dos botões */
 #alinhar{
-display: flex;
-gap: 20px;
-justify-content: center;
- box-sizing: border-box;
-}
-
-
-.grid-lixos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: center;
     gap: 20px;
+    margin-top: 20px;
 }
 
+/* Botões */
+button{
+    width: 180px;
+    height: 50px;
 
+    border: none;
+    border-radius: 30px;
+
+    color: #6abb01;
+    background-color: #3e6b04;
+
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: all 0.3s ease;
+}
+
+button:hover{
+    transform: scale(1.08);
+}
+
+/* Botão vermelho */
+#vermelho{
+    color: #db2810;
+    background-color: #721306;
+}
+
+#vermelho:hover{
+    background-color: #8f1808;
+}
+
+/* Seção dos tipos de lixo */
+#section-lixos{
+    padding: 60px 20px;
+}
+
+#section-lixos h2{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Grid dos cards */
+.grid-lixos{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Estilo padrão dos cards */
+.card-papel,
+.card-plastico,
+.card-vidro,
+.card-metal{
+    padding: 20px;
+    border-radius: 12px;
+
+    color: white;
+    text-align: center;
+
+    transition: transform 0.3s ease;
+}
+
+.card-papel:hover,
+.card-plastico:hover,
+.card-vidro:hover,
+.card-metal:hover{
+    transform: translateY(-5px);
+}
+
+/* Cores dos cards */
 .card-papel{
-background-color: #142cb6;
-border-radius: 10px;
+    background-color: #142cb6;
 }
 
 .card-plastico{
-background-color: #cc1616;
-border-radius: 10px;
+    background-color: #cc1616;
 }
 
 .card-vidro{
-
-background-color: #108d2b;
-border-radius: 10px;
+    background-color: #108d2b;
 }
 
 .card-metal{
+    background-color: #ccda0f;
+    color: black;
+}
 
-background-color: #ccda0f;
-border-radius: 10px;
+/* Responsividade */
+@media (max-width: 768px){
+    .grid-lixos{
+        grid-template-columns: 1fr;
+    }
+
+    #alinhar{
+        flex-direction: column;
+        align-items: center;
+    }
 }
